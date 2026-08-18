@@ -98,10 +98,43 @@ Nota tecnica: al usar `node:sqlite` aparece un warning "experimental". No es un 
 Respondan individualmente:
 
 1. Para que usamos JSON y para que usamos SQLite?
+
+JSON: Se usa para intercambiar datos entre sistemas (como un frontend y un backend) y para almacenar configuraciones ligeras. Es un formato de texto plano estructurado que resulta fácil de leer para humanos y programadores.
+
+SQLite: Es un sistema de base de datos relacional ligero contenido en un solo archivo. Se usa para almacenar y gestionar volúmenes de datos más grandes de forma estructurada, permitiendo búsquedas rápidas, relaciones entre tablas e integridad de datos sin necesidad de un servidor externo.
+
+
 2. Que pasaria si cerramos el programa con los datos solo en JSON?
+
+Si el archivo JSON ya fue guardado en el disco: Los datos se conservan de forma permanente y seguirán ahí cuando vuelvas a abrir el programa.
+
+Si los datos estaban solo en memoria (en una variable JSON sin guardar en disco): Se perderán completamente al cerrar la aplicación.
+
+Riesgo de corrupción: Si el programa se cierra de forma abrupta mientras escribías en el archivo JSON, todo el archivo puede quedar corrupto e ilegible.
+
+
 3. Que hace `?` dentro de una consulta preparada?
+
+El signo ? actúa como un marcador de posición (placeholder) para los datos que se van a insertar dinámicamente en la consulta SQL. En lugar de concatenar cadenas directamente, la base de datos reemplaza el ? de forma segura con el valor proporcionado, lo que previene ataques de inyección SQL y permite reutilizar la consulta compilada con diferentes valores.
+
+
 4. Que diferencia hay entre `.get()`, `.all()` y `.run()`?
+
+.get(): Ejecuta una consulta SELECT y devuelve únicamente la primera fila que coincida con la condición (o null/undefined si no encuentra nada).
+
+.all(): Ejecuta una consulta SELECT y devuelve un arreglo con todas las filas que coincidan.
+
+.run(): Ejecuta consultas que modifican la base de datos (INSERT, UPDATE, DELETE). No devuelve filas de datos, sino metadatos sobre la operación (como el número de filas afectadas o el último ID insertado).
+
+
 5. Donde viste este ciclo JSON -> base de datos -> JSON en la vida real?
+
+Redes sociales (Instagram/Twitter): Envías una publicación desde la app móvil como un objeto JSON al servidor.
+
+Procesamiento: El servidor toma esos datos y los guarda de forma estructurada en la base de datos.
+
+Consulta: Cuando tus amigos abren su feed, el servidor lee la base de datos y les devuelve la información convertida nuevamente en JSON para que la app dibuje las imágenes y comentarios.
+
 
 ## Conclusion
 

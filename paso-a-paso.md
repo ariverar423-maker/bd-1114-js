@@ -73,7 +73,16 @@ console.log('Consulta con filtros:', resultado);
 Preguntas:
 
 1. Que pasa con este codigo si necesito 5 filtros? Y si necesito 10?
+
+Cada vez que ejecutas un .filter(), JavaScript recorre todo el arreglo de principio a fin para generar un nuevo arreglo en memoria con los resultados de ese paso.Ineficiencia en memoria y procesamiento: Con 5 o 10 filtros encadenados, el programa crea 5 o 10 arreglos intermedios. Si la lista tuviera miles o millones de registros, esto consumiría muchísima memoria RAM y volvería la ejecución muy lenta ($O(n)$ por cada filtro).Código difícil de mantener: Se vuelve rígido y complejo de construir dinámicamente según las opciones que elija un usuario en una interfaz.Una base de datos resuelve esto optimizando la consulta antes de ejecutarla, aplicando todos los filtros en un solo paso y utilizando índices para no tener que recorrer toda la información.
+
+
 2. Si cierro el programa, donde quedaron los datos?
+
+Los datos se pierden por completo.
+
+El arreglo alumnos está almacenado únicamente en la memoria RAM asignada al proceso de Node.js. Al terminar de ejecutarse el script o cerrar la terminal, esa memoria se libera y se borra. Para que los datos persistan al cerrar el programa, tendrías que guardarlos en un archivo físico en el disco (como un .json) o en una base de datos (como SQLite).
+
 
 Respuesta corta: JSON **no consulta** (solo filtra a mano) y **no persiste** (se pierde al cerrar). Para eso existe SQLite.
 
@@ -207,7 +216,14 @@ db.exec(`
 Despues cargá cursos e inscripciones, y resolvé estas consultas:
 
 1. Que alumnos se inscribieron a "Base de Datos"?
+
+Anna y Luis 
+
 2. Cuantos cursos tiene cada alumno?
+
+Anna tiene dos cursos 
+luis tiene un curso 
+Pedro tambien tiene un curso 
 
 Pista: para la primera necesitas un `JOIN` entre las tres tablas. Para la segunda, `GROUP BY`.
 
